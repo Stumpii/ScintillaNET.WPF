@@ -1,0 +1,268 @@
+﻿<Window x:Class="SCide.WPF.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ad="http://schemas.xceed.com/wpf/xaml/avalondock" xmlns:my="clr-namespace:SCide.WPF" xmlns:sc="http://scintillanet.codeplex.com"
+        Title="MainWindow" Width="860" Height="547"
+        Loaded="Window_Loaded">
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static my:MainWindow.NewFileCommand}" Executed="newMenuItem_Click" />
+        <CommandBinding Command="{x:Static my:MainWindow.OpenFileCommand}" Executed="openMenuItem_Click" />
+        <CommandBinding Command="{x:Static my:MainWindow.SaveFileCommand}" Executed="saveMenuItem_Click" />
+        <CommandBinding Command="{x:Static my:MainWindow.SaveAllFilesCommand}" Executed="saveAllMenuItem_Click" />
+        <CommandBinding Command="{x:Static my:MainWindow.UndoCommand}" Executed="undoMenuItem_Click" />
+        <CommandBinding Command="{x:Static my:MainWindow.RedoCommand}" Executed="redoMenuItem_Click" />
+        <CommandBinding Command="{x:Static my:MainWindow.CutCommand}" Executed="cutMenuItem_Click" />
+        <CommandBinding Command="{x:Static my:MainWindow.CopyCommand}" Executed="copyMenuItem_Click" />
+        <CommandBinding Command="{x:Static my:MainWindow.PasteCommand}" Executed="pasteMenuItem_Click" />
+        <CommandBinding Command="{x:Static my:MainWindow.SelectAllCommand}" Executed="selectAllMenuItem_Click" />
+        <CommandBinding Command="{x:Static my:MainWindow.IncrementalSearchCommand}" Executed="incrementalSearchMenuItem_Click" />
+        <CommandBinding Command="{x:Static my:MainWindow.FindCommand}" Executed="findMenuItem_Click" />
+        <CommandBinding Command="{x:Static my:MainWindow.ReplaceCommand}" Executed="replaceMenuItem_Click" />
+        <CommandBinding Command="{x:Static my:MainWindow.GotoCommand}" Executed="gotoMenuItem_Click" />
+    </Window.CommandBindings>
+    <Window.InputBindings>
+        <KeyBinding Key="N"
+                    Command="{x:Static my:MainWindow.NewFileCommand}"
+                    Modifiers="Ctrl" />
+        <KeyBinding Key="O"
+                    Command="{x:Static my:MainWindow.OpenFileCommand}"
+                    Modifiers="Ctrl" />
+        <KeyBinding Key="S"
+                    Command="{x:Static my:MainWindow.SaveFileCommand}"
+                    Modifiers="Ctrl" />
+        <KeyBinding Key="S"
+                    Command="{x:Static my:MainWindow.SaveAllFilesCommand}"
+                    Modifiers="Ctrl+Shift" />
+        <KeyBinding Key="P"
+                    Command="{x:Static my:MainWindow.PrintFileCommand}"
+                    Modifiers="Ctrl" />
+        <KeyBinding Key="Z"
+                    Command="{x:Static my:MainWindow.UndoCommand}"
+                    Modifiers="Ctrl" />
+        <KeyBinding Key="Y"
+                    Command="{x:Static my:MainWindow.RedoCommand}"
+                    Modifiers="Ctrl" />
+        <KeyBinding Key="X"
+                    Command="{x:Static my:MainWindow.CutCommand}"
+                    Modifiers="Ctrl" />
+        <KeyBinding Key="C"
+                    Command="{x:Static my:MainWindow.CopyCommand}"
+                    Modifiers="Ctrl" />
+        <KeyBinding Key="V"
+                    Command="{x:Static my:MainWindow.PasteCommand}"
+                    Modifiers="Ctrl" />
+        <KeyBinding Key="A"
+                    Command="{x:Static my:MainWindow.SelectAllCommand}"
+                    Modifiers="Ctrl" />
+        <KeyBinding Key="I"
+                    Command="{x:Static my:MainWindow.IncrementalSearchCommand}"
+                    Modifiers="Ctrl" />
+        <KeyBinding Key="F"
+                    Command="{x:Static my:MainWindow.FindCommand}"
+                    Modifiers="Ctrl" />
+        <KeyBinding Key="H"
+                    Command="{x:Static my:MainWindow.ReplaceCommand}"
+                    Modifiers="Ctrl" />
+        <KeyBinding Key="G"
+                    Command="{x:Static my:MainWindow.GotoCommand}"
+                    Modifiers="Ctrl" />
+    </Window.InputBindings>
+    <Grid>
+        <my:OpenFileDialog x:Name="openFileDialog" Filter="All Files (*.*)|*.*" Multiselect="True" />
+        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Menu HorizontalAlignment="Stretch" VerticalAlignment="Top" DockPanel.Dock="Top">
+                <MenuItem Header="_File">
+                    <MenuItem Name="newMenuItem" Click="newMenuItem_Click" Header="_New">
+                        <MenuItem.Icon>
+                            <Image Height="16px" Source="/SCide.WPF;component/Images/ImageFileNew.png" Stretch="Uniform" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="openMenuItem" Click="openMenuItem_Click" Header="_Open...">
+                        <MenuItem.Icon>
+                            <Image Height="16px" Source="/SCide.WPF;component/Images/ImageFileOpen.png" Stretch="Uniform" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Name="closeMenuItem" Click="closeWindowMenuItem_Click" Header="_Close" />
+                    <Separator />
+                    <MenuItem Name="saveMenuItem" Click="saveMenuItem_Click" Header="_Save">
+                        <MenuItem.Icon>
+                            <Image Height="16px" Source="/SCide.WPF;component/Images/ImageFileSave.png" Stretch="Uniform" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="saveAsMenuItem" Click="saveAsMenuItem_Click" Header="Save _As..." />
+                    <MenuItem Name="saveAllMenuItem" Click="saveAllMenuItem_Click" Header="Save A_ll">
+                        <MenuItem.Icon>
+                            <Image Height="16px" Source="/SCide.WPF;component/Images/ImageFileSaveAll.png" Stretch="Uniform" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Name="exitMenuItem" Click="exitMenuItem_Click" Header="E_xit" />
+                </MenuItem>
+                <MenuItem Header="_Edit">
+                    <MenuItem Name="undoMenuItem" Click="undoMenuItem_Click" Header="_Undo">
+                        <MenuItem.Icon>
+                            <Image Height="16px" Source="/SCide.WPF;component/Images/ImageEditUndo.png" Stretch="Uniform" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="redoMenuItem" Click="redoMenuItem_Click" Header="_Redo">
+                        <MenuItem.Icon>
+                            <Image Height="16px" Source="/SCide.WPF;component/Images/ImageEditRedo.png" Stretch="Uniform" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Name="cutMenuItem" Click="cutMenuItem_Click" Header="Cu_t">
+                        <MenuItem.Icon>
+                            <Image Height="16px" Source="/SCide.WPF;component/Images/ImageEditCut.png" Stretch="Uniform" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="copyMenuItem" Click="copyMenuItem_Click" Header="_Copy">
+                        <MenuItem.Icon>
+                            <Image Height="16px" Source="/SCide.WPF;component/Images/ImageEditCopy.png" Stretch="Uniform" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="pasteMenuItem" Click="pasteMenuItem_Click" Header="_Paste">
+                        <MenuItem.Icon>
+                            <Image Height="16px" Source="/SCide.WPF;component/Images/ImageEditPaste.png" Stretch="Uniform" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Name="selectLine" Click="selectLineMenuItem_Click" Header="Select _Line" />
+                    <MenuItem Name="selectAllMenuItem" Click="selectAllMenuItem_Click" Header="Select _All" />
+                    <MenuItem Name="clearSelection" Click="clearSelectionMenuItem_Click" Header="Clear Selection" />
+                    <Separator />
+                    <MenuItem Header="_Find and Replace">
+                        <MenuItem Name="incrementalSearchMenuItem" Click="incrementalSearchMenuItem_Click" Header="_Incremental Search" />
+                        <MenuItem Name="findMenuItem" Click="findMenuItem_Click" Header="_Find" />
+                        <MenuItem Name="replaceMenuItem" Click="replaceMenuItem_Click" Header="_Replace" />
+                        <MenuItem Name="findInFilesMenuItem" Click="findInFilesMenuItem_Click" Header="F_ind in Files" />
+                        <MenuItem Name="replaceInFilesMenuItem" Click="replaceInFilesMenuItem_Click" Header="Replace in File_s" />
+                    </MenuItem>
+                    <MenuItem Name="gotoMenuItem" Click="gotoMenuItem_Click" Header="_Go To" />
+                    <Separator />
+                    <MenuItem Header="Boo_kmarks">
+                        <MenuItem Name="toggleBookmarkMenuItem" Click="toggleBookmarkMenuItem_Click" Header="_Toggle Bookmark" />
+                        <MenuItem Name="previousBookmarkMenuItem" Click="previousBookmarkMenuItem_Click" Header="_Previous Bookmark" />
+                        <MenuItem Name="nextBookmarkMenuItem" Click="nextBookmarkMenuItem_Click" Header="Next _Bookmark" />
+                        <MenuItem Name="clearBookmarksMenuItem" Click="clearBookmarksMenuItem_Click" Header="_Clear Bookmarks" />
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="Ad_vanced">
+                        <MenuItem Name="makeUpperCaseMenuItem" Click="makeUpperCaseMenuItem_Click" Header="Make _Upper Case" />
+                        <MenuItem Name="makeLowerCaseMenuItem" Click="makeLowerCaseMenuItem_Click" Header="Make _Lower Case" />
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="_View">
+                    <MenuItem Name="toolbarMenuItem" Click="toolbarMenuItem_Click" Header="Tool Bar"
+                              IsCheckable="True" IsChecked="True" />
+                    <MenuItem Name="statusBarMenuItem" Click="statusBarMenuItem_Click" Header="Status Bar"
+                              IsCheckable="True" IsChecked="True" />
+                    <Separator />
+                    <MenuItem Name="whitespaceMenuItem" Click="whitespaceMenuItem_Click" Header="W_hitespace" />
+                    <MenuItem Name="wordWrapMenuItem" Click="wordWrapMenuItem_Click" Header="_Word Wrap" />
+                    <MenuItem Name="endOfLineMenuItem" Click="endOfLineMenuItem_Click" Header="_End of Line" />
+                    <Separator />
+                    <MenuItem Name="zoomInMenuItem" Click="zoomInMenuItem_Click" Header="Zoom _In" />
+                    <MenuItem Name="zoomOutMenuItem" Click="zoomOutMenuItem_Click" Header="Zoom _Out" />
+                    <MenuItem Name="resetZoomMenuItem" Click="resetZoomMenuItem_Click" Header="Reset _Zoom" />
+                    <Separator />
+                    <MenuItem Name="lineNumbersMenuItem" Click="lineNumbersMenuItem_Click" Header="Line Nu_mbers" />
+                    <Separator />
+                    <MenuItem Name="foldLevelMenuItem" Click="foldLevelMenuItem_Click" Header="_Fold Level" />
+                    <MenuItem Name="unfoldLevelMenuItem" Click="unfoldLevelMenuItem_Click" Header="_Unfold Level" />
+                    <MenuItem Name="foldAllMenuItem" Click="foldAllMenuItem_Click" Header="Fold _All" />
+                    <MenuItem Name="unfoldAllMenuItem" Click="unfoldAllMenuItem_Click" Header="Unfold A_ll" />
+                </MenuItem>
+                <MenuItem Header="_Window">
+                    <MenuItem Name="bookmarkWindowMenuItem" Click="bookmarkWindowMenuItem_Click" Header="_Bookmark Window"
+                              Visibility="Collapsed" />
+                    <MenuItem Name="findResultsMenuItem" Click="findResultsMenuItem_Click" Header="_Find Results"
+                              Visibility="Collapsed" />
+                    <Separator Visibility="Collapsed" />
+                    <MenuItem Name="closeWindowMenuItem" Click="closeWindowMenuItem_Click" Header="_Close" />
+                    <MenuItem Name="closeAllMenuItem" Click="closeAllMenuItem_Click" Header="C_lose All"
+                              Visibility="Collapsed" />
+                </MenuItem>
+                <MenuItem Header="_Help">
+                    <MenuItem Name="aboutMenuItem" Click="aboutMenuItem_Click" Header="_About" />
+                </MenuItem>
+            </Menu>
+            <ToolBarPanel Name="toolStrip" HorizontalAlignment="Stretch" DockPanel.Dock="Top">
+                <ToolBarTray>
+                    <ToolBar Height="25px" ToolBarTray.IsLocked="True">
+                        <Button Width="23px" Height="22px" Padding="0px"
+                                Click="newMenuItem_Click" ToolTip="New File (Ctrl+N)">
+                            <StackPanel>
+                                <Image Height="16px" Source="/SCide.WPF;component/Images/ImageFileNew.png" Stretch="Uniform" />
+                            </StackPanel>
+                        </Button>
+                        <Button Width="23px" Height="22px" Padding="0px"
+                                Click="openMenuItem_Click" ToolTip="Open File (Ctrl+O)">
+                            <StackPanel>
+                                <Image Height="16px" Source="/SCide.WPF;component/Images/ImageFileOpen.png" Stretch="Uniform" />
+                            </StackPanel>
+                        </Button>
+                        <Button Width="23px" Height="22px" Padding="0px"
+                                Click="saveMenuItem_Click" ToolTip="Save File (Ctrl+S)">
+                            <StackPanel>
+                                <Image Height="16px" Source="/SCide.WPF;component/Images/ImageFileSave.png" Stretch="Uniform" />
+                            </StackPanel>
+                        </Button>
+                        <Button Width="23px" Height="22px" Padding="0px"
+                                Click="saveAllMenuItem_Click" ToolTip="Save All Files (Ctrl+Shift+S)">
+                            <StackPanel>
+                                <Image Height="16px" Source="/SCide.WPF;component/Images/ImageFileSaveAll.png" Stretch="Uniform" />
+                            </StackPanel>
+                        </Button>
+                        <Separator />
+                        <Button Width="23px" Height="22px" Padding="0px"
+                                Click="cutMenuItem_Click" ToolTip="Cut (Ctrl+X)">
+                            <StackPanel>
+                                <Image Height="16px" Source="/SCide.WPF;component/Images/ImageEditCut.png" Stretch="Uniform" />
+                            </StackPanel>
+                        </Button>
+                        <Button Width="23px" Height="22px" Padding="0px"
+                                Click="copyMenuItem_Click" ToolTip="Copy (Ctrl+C)">
+                            <StackPanel>
+                                <Image Height="16px" Source="/SCide.WPF;component/Images/ImageEditCopy.png" Stretch="Uniform" />
+                            </StackPanel>
+                        </Button>
+                        <Button Width="23px" Height="22px" Padding="0px"
+                                Click="pasteMenuItem_Click" ToolTip="Paste (Ctrl+V)">
+                            <StackPanel>
+                                <Image Height="16px" Source="/SCide.WPF;component/Images/ImageEditPaste.png" Stretch="Uniform" />
+                            </StackPanel>
+                        </Button>
+                        <Separator />
+                        <Button Width="23px" Height="22px" Padding="0px"
+                                Click="undoMenuItem_Click" ToolTip="Undo (Ctrl+Z)">
+                            <StackPanel>
+                                <Image Height="16px" Source="/SCide.WPF;component/Images/ImageEditUndo.png" Stretch="Uniform" />
+                            </StackPanel>
+                        </Button>
+                        <Button Width="23px" Height="22px" Padding="0px"
+                                Click="redoMenuItem_Click" ToolTip="Redo (Ctrl+Y)">
+                            <StackPanel>
+                                <Image Height="16px" Source="/SCide.WPF;component/Images/ImageEditRedo.png" Stretch="Uniform" />
+                            </StackPanel>
+                        </Button>
+                    </ToolBar>
+                </ToolBarTray>
+            </ToolBarPanel>
+            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DockPanel.Dock="Bottom">
+                <StatusBar Name="statusStrip" Height="22px" HorizontalAlignment="Stretch"
+                           DockPanel.Dock="Bottom">
+                    <StatusBarItem />
+                </StatusBar>
+                <ad:DockingManager Name="dockPanel" ActiveContentChanged="dockPanel_ActiveContentChanged">
+                    <ad:DockingManager.Theme>
+                        <ad:VS2010Theme />
+                    </ad:DockingManager.Theme>
+                    <ad:LayoutRoot>
+                        <ad:LayoutPanel>
+                            <ad:LayoutDocumentPane x:Name="documentsRoot" IsMaximized="True" />
+                        </ad:LayoutPanel>
+                    </ad:LayoutRoot>
+                </ad:DockingManager>
+            </DockPanel>
+        </DockPanel>
+    </Grid>
+</Window>

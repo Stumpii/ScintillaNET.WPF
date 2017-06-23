@@ -1,0 +1,8 @@
+﻿<ad:LayoutDocument x:Class="SCide.WPF.DocumentForm" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:ad="http://schemas.xceed.com/wpf/xaml/avalondock" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:my="clr-namespace:SCide.WPF" xmlns:sn="http://scintillanet.codeplex.com" mc:Ignorable="d">
+    <Grid>
+        <my:SaveFileDialog x:Name="saveFileDialog" Filter="All Files (*.*)|*.*" />
+        <sn:ScintillaWPF Name="scintilla" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+    </Grid>
+</ad:LayoutDocument>
