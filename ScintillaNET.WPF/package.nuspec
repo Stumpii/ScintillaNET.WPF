@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <!--*-->
+    <id>ScintillaNET.WPF</id>
+    <!--*-->
+    <version>1.0.1</version>
+    <title>ScintillaNET.WPF</title>
+    <!--*-->
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <!--    <licenseUrl></licenseUrl>    -->
+    <projectUrl>https://github.com/Stumpii/ScintillaNET.WPF</projectUrl>
+    <!--    <iconUrl></iconUrl>    -->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <!--*-->
+    <description>$description$</description>
+    <!--*-->
+    <releaseNotes>Please&amp;#x0020;visit&amp;#x0020;https://github.com/Stumpii/ScintillaNET.WPF&amp;#x0020;to&amp;#x0020;view&amp;#x0020;the&amp;#x0020;release&amp;#x0020;notes.</releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>
+    </tags>
+    <dependencies>
+   <group targetFramework="net40">
+      <dependency id="jacobslusser.ScintillaNET" version="3.6.3" />
+   </group>
+</dependencies>
+  </metadata>
+</package>

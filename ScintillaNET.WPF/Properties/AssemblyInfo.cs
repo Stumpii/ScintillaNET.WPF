@@ -10,7 +10,7 @@ using System.Windows.Markup;
 [assembly: AssemblyTitle("ScintillaNET.WPF")]
 [assembly: AssemblyDescription("WPF Wrapper for the Scintilla Text Editor Control")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Steve Towner")]
 [assembly: AssemblyProduct("ScintillaNET.WPF")]
 [assembly: AssemblyCopyright("Copyright 2017 Steve Towner")]
 [assembly: AssemblyTrademark("")]
@@ -33,14 +33,10 @@ using System.Windows.Markup;
 //
 // You can specify all the values or you can default the Revision and Build Numbers
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("1.0.0.*")]
-[assembly: AssemblyFileVersion("1.0.0")]
+[assembly: AssemblyVersion("1.0.1.*")]
+[assembly: AssemblyFileVersion("1.0.1")]
 [assembly: AssemblyInformationalVersion("2.6.0.0")]
 [assembly: NeutralResourcesLanguageAttribute("en-US")]
-
-
-
 [assembly: XmlnsPrefix("http://scintillanet.codeplex.com", "sn")]
 [assembly: XmlnsDefinition("http://scintillanet.codeplex.com", "ScintillaNET.WPF")]
 [assembly: XmlnsDefinition("http://scintillanet.codeplex.com", "ScintillaNET.WPF.Configuration")]
-

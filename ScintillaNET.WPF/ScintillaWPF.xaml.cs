@@ -1959,6 +1959,17 @@ namespace ScintillaNET.WPF
         }
 
         /// <summary>
+        /// Occurs when a key is pressed while the control has focus.
+        /// </summary>
+        [Category("Notifications")]
+        [Description("Occurs when the control is entered.")]
+        public event System.EventHandler Enter
+        {
+            add { mInnerScintilla.Enter += value; }
+            remove { mInnerScintilla.Enter -= value; }
+        }
+
+        /// <summary>
         /// Not supported.
         /// </summary>
         [Browsable(false)]
