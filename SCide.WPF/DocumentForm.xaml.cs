@@ -7,8 +7,8 @@ using ScintillaNET;
 using System.Globalization;
 using System.Windows;
 using System.Diagnostics;
-using ScintillaNET_FindReplaceDialog;
 using Xceed.Wpf.AvalonDock.Layout;
+using ScintillaNET_FindReplaceDialog;
 
 namespace SCide.WPF
 {
