@@ -50,9 +50,8 @@
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ScintillaNET FindReplaceDialog, Version=1.4.0.17540, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libraries\ScintillaNET FindReplaceDialog.dll</HintPath>
+    <Reference Include="ScintillaNET FindReplaceDialog">
+      <HintPath>..\..\ScintillaNET-FindReplaceDialog\ScintillaNet FindReplaceDialog\bin\Debug\ScintillaNET FindReplaceDialog.dll</HintPath>
     </Reference>
     <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
