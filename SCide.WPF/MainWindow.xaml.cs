@@ -692,6 +692,7 @@ namespace SCide.WPF
         {
             ScintillaWPF ScintillaNet = doc.Scintilla;
             ScintillaNet.KeyDown += ScintillaNet_KeyDown;
+            ScintillaNet.CharAdded += ScintillaNet_CharAdded;
 
             // INITIAL VIEW CONFIG
             ScintillaNet.WrapMode = WrapMode.None;
@@ -741,6 +742,21 @@ namespace SCide.WPF
 
             // Set the zoom
             doc.Scintilla.Zoom = _zoomLevel;
+        }
+
+        private void ScintillaNet_CharAdded(object sender, CharAddedEventArgs e)
+        {
+            // Find the word start
+            var currentPos = ActiveDocument.Scintilla.CurrentPosition;
+            var wordStartPos = ActiveDocument.Scintilla.WordStartPosition(currentPos, true);
+
+            // Display the autocompletion list
+            var lenEntered = currentPos - wordStartPos;
+            if (lenEntered > 0)
+            {
+                if (!ActiveDocument.Scintilla.AutoCActive)
+                    ActiveDocument.Scintilla.AutoCShow(lenEntered, "abstract as base break case catch checked continue default delegate do else event explicit extern false finally fixed for foreach goto if implicit in interface internal is lock namespace new null object operator out override params private protected public readonly ref return sealed sizeof stackalloc switch this throw true try typeof unchecked unsafe using virtual while");
+            }
         }
 
         private void ScintillaNet_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
