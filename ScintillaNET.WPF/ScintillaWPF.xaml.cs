@@ -35,6 +35,13 @@ namespace ScintillaNET.WPF
             this.mInnerScintilla = new SN.Scintilla();
             this.winFormsHost.Child = this.mInnerScintilla;
             this.mWPFConfig = new ScintillaWPFConfigItemCollection(this);
+
+            this.mInnerScintilla.LostFocus += MInnerScintilla_LostFocus;
+        }
+
+        private void MInnerScintilla_LostFocus(object sender, EventArgs e)
+        {
+            SetValue(TextProperty, mInnerScintilla.Text);
         }
 
         private readonly ScintillaWPFConfigItemCollection mWPFConfig;
@@ -1526,6 +1533,27 @@ namespace ScintillaNET.WPF
             set { mInnerScintilla.Technology = value; }
         }
 
+        public static readonly DependencyProperty TextProperty =
+            DependencyProperty.Register("Text", typeof(string), typeof(ScintillaWPF),
+            new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnTextChanged, CoerceText));
+
+        private static void OnTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ScintillaWPF element = (ScintillaWPF)d;
+
+            element.OnTextChanged((string)e.OldValue, (string)e.NewValue);
+        }
+
+        protected virtual void OnTextChanged(string oldText, string newText)
+        {
+            mInnerScintilla.Text = newText;
+        }
+
+        private static object CoerceText(DependencyObject d, object value)
+        {
+            return (string)value;
+        }
+
         /// <summary>
         /// Gets or sets the current document text in the <see cref="Scintilla" /> control.
         /// </summary>
@@ -1534,8 +1562,12 @@ namespace ScintillaNET.WPF
         [Editor("System.ComponentModel.Design.MultilineStringEditor, System.Design", typeof(System.Drawing.Design.UITypeEditor))]
         public string Text
         {
-            get { return mInnerScintilla.Text; }
-            set { mInnerScintilla.Text = value; }
+            get { return (string)GetValue(TextProperty); }
+            set
+            {
+                SetValue(TextProperty, value);
+                mInnerScintilla.Text = value;
+            }
         }
 
         /// <summary>
