@@ -18,12 +18,14 @@ using System.Windows.Media.Imaging;
 using ScintillaNET.WPF.Configuration;
 
 using SN = ScintillaNET;
+using PropertyChanged;
 
 namespace ScintillaNET.WPF
 {
     [DefaultProperty("Text")]
     [DefaultEvent("DocumentChanged")]
     [ContentProperty("WPFConfig")]
+    [AddINotifyPropertyChangedInterface]
     public partial class ScintillaWPF : UserControl
     {
         private readonly SN.Scintilla mInnerScintilla;
@@ -1535,7 +1537,7 @@ namespace ScintillaNET.WPF
 
         public static readonly DependencyProperty TextProperty =
             DependencyProperty.Register("Text", typeof(string), typeof(ScintillaWPF),
-            new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnTextChanged, CoerceText));
+            new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnTextChanged));
 
         private static void OnTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -1543,17 +1545,10 @@ namespace ScintillaNET.WPF
 
             element.OnTextChanged((string)e.OldValue, (string)e.NewValue);
         }
-
         protected virtual void OnTextChanged(string oldText, string newText)
         {
             mInnerScintilla.Text = newText;
         }
-
-        private static object CoerceText(DependencyObject d, object value)
-        {
-            return (string)value;
-        }
-
         /// <summary>
         /// Gets or sets the current document text in the <see cref="Scintilla" /> control.
         /// </summary>
@@ -1562,7 +1557,11 @@ namespace ScintillaNET.WPF
         [Editor("System.ComponentModel.Design.MultilineStringEditor, System.Design", typeof(System.Drawing.Design.UITypeEditor))]
         public string Text
         {
-            get { return (string)GetValue(TextProperty); }
+            get
+            {
+                SetValue(TextProperty, mInnerScintilla.Text);
+                return (string)GetValue(TextProperty);
+            }
             set
             {
                 SetValue(TextProperty, value);
@@ -3282,7 +3281,7 @@ namespace ScintillaNET.WPF
         /// </remarks>
         public int ReplaceTarget(string text)
         {
-            return mInnerScintilla.SearchInTarget(text);
+            return mInnerScintilla.ReplaceTarget(text);
         }
 
         /// <summary>

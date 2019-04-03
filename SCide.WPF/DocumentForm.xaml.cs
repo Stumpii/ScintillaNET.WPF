@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Controls;
 using ScintillaNET.WPF;
 using System.IO;
@@ -143,7 +143,7 @@ namespace SCide.WPF
             using (FileStream fs = File.Create(filePath))
             {
                 using (BinaryWriter bw = new BinaryWriter(fs))
-                    bw.Write(scintilla.Text.ToCharArray(), 0, scintilla.Text.Length - 1); // Omit trailing NULL
+                    bw.Write(scintilla.Text.ToCharArray(), 0, scintilla.Text.Length);
             }
             this.Title = Path.GetFileName(filePath);
 
